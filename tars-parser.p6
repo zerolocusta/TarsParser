@@ -2,13 +2,22 @@ grammar Tars {
     rule TOP {
         [
             | <comment>
-            | <type>
+            | <simple-type>
+            | <module-definition>
         ]+
+    }
+
+    rule module-definition {
+        <module> <name> '{' '}' ';'
     }
 
     rule comment {
         # 形如 // hello wrold
         <slash><slash>\s*?[<comment-body>] 
+    }
+
+    token module {
+        'module'
     }
 
     token comment-body {
@@ -18,24 +27,68 @@ grammar Tars {
     token slash {
         '/'
     }
+    
+    token vector {
+        'vector'
+    }
 
-    proto token type {
+    token map {
+        'map'
+    }
+
+    token name {
+        [ <alpha> | '_' ] [ <alnum> | '_' | '-' ]*
+    }
+
+    proto token simple-type {
         *
     }
 
-    token type:sym<void> {
+    token simple-type:sym<void> {
         <sym>
     }
 
-    token type:sym<bool> {
+    token simple-type:sym<bool> {
         <sym>
     }
 
-    token type:sym<byte> {
+    token simple-type:sym<byte> {
         <sym>
     }
 
-    token type:sym<short> {
+    token simple-type:sym<short> {
+        <sym>
+    }
+
+    token simple-type:sym<int> {
+        <sym>
+    }
+
+    token simple-type:sym<long> {
+        <sym>
+    }
+
+    token simple-type:sym<float> {
+        <sym>
+    }
+
+    token simple-type:sym<double> {
+        <sym>
+    }
+
+    token simple-type:sym<string> {
+        <sym>
+    }
+
+    token simple-type:sym<unsigned byte> {
+        <sym>
+    }
+
+    token simple-type:sym<unsigned short> {
+        <sym>
+    }
+
+    token simple-type:sym<unsigned int> {
         <sym>
     }
 }
@@ -48,11 +101,11 @@ class TarsAction {
         say $/.Str;
     }
 
-    method type:sym<void> ($/) {
+    method simple-type:sym<void> ($/) {
         say 'found sym void';
     }
 
-    method type:sym<bool> ($/) {
+    method simple-type:sym<bool> ($/) {
         say 'found sym bool';
     }
 }
