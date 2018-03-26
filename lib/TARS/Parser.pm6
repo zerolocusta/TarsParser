@@ -38,12 +38,12 @@ grammar Tars {
         <tars-type> <name> '(' <parameter-list>? ')' ';'
     }
 
-    rule parameter {
-        <out>? <tars-type> <name>
-    }
-
     rule parameter-list {
         [ <parameter> ',' ]* <parameter>
+    }
+    
+    rule parameter {
+        <out>? <tars-type> <name>
     }
 
     token out {
