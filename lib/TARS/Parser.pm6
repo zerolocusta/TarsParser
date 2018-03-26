@@ -29,7 +29,25 @@ grammar Tars {
     }
 
     rule interface-definition {
-        <interface> <name> '{' '}' ';'
+        <interface> <name> '{'
+            <interface-field-definition>*
+        '}' ';'
+    }
+
+    rule interface-field-definition {
+        <tars-type> <name> '(' <parameter-list>? ')' ';'
+    }
+
+    rule parameter {
+        <out>? <tars-type> <name>
+    }
+
+    rule parameter-list {
+        [ <parameter> ',' ]* <parameter>
+    }
+
+    token out {
+        'out'
     }
 
     rule enumerate-definition {

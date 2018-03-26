@@ -51,5 +51,12 @@ module Test
 
     interface Demo
     {
+        int get(out vector<map<int, string>> v);
+        
+        int set(vector<map<int, string>> v);
+
+        int get1();
+
+        int set1(vector<int> v, map<string, string> rsp);
     };
 };
