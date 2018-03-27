@@ -5,8 +5,13 @@ grammar Tars {
     rule TOP {
         [
             | <comment>
+            | <include-file>
             | <module-definition>
         ]+
+    }
+
+    rule include-file {
+        <include> <path>
     }
 
     rule module-definition {
@@ -115,6 +120,14 @@ grammar Tars {
         'enum'
     }
 
+    token include {
+        'include'
+    }
+
+    token path {
+        '"' ['\\'. | .]*? '"'
+    }
+
     token comment-body {
         <-[\n]>*
     }
@@ -124,7 +137,7 @@ grammar Tars {
     }
 
     token number {
-        <digit>+
+        ['+' | '-']?<digit>+
     }
 
     token tag {
