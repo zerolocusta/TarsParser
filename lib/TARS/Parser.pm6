@@ -53,7 +53,7 @@ grammar Tars {
     rule enumerate-definition {
         <enumerate> <name> '{' 
             <enumerate-field-definition-with-comma>+
-            <enumerate-field-definition-without-comma>?
+            <enumerate-field-definition-optional-comma>?
         '}' ';'
     }
 
@@ -61,7 +61,7 @@ grammar Tars {
         <name> [ '=' <number> ]? ','
     }
 
-    rule enumerate-field-definition-without-comma {
+    rule enumerate-field-definition-optional-comma {
         <name> [ '=' <number> ]? ','?
     }
 
